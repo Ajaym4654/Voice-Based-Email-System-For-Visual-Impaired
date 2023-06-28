@@ -1,0 +1,112 @@
+import speech_recognition as sr
+import easyimap as e
+import pyaudio as listen
+import pyttsx3
+import smtplib
+from email.message import EmailMessage
+
+
+
+unm = sender_email_id@gmail.com
+pwd = XXXXXXXXXXXXXXXXXX
+
+
+r = sr.Recognizer()
+engine = pyttsx3.init()
+
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
+engine.setProperty('rate', 150)
+
+def speak(text)
+    print(text)
+    engine.say(text)
+    engine.runAndWait()
+
+def listen()
+    with sr.Microphone() as source
+        r.adjust_for_ambient_noise(source)
+        str = speak now
+        speak(str)
+        audio = r.listen(source)
+        try
+            text = r.recognize_google(audio)
+            return text
+        except
+            str = cann't recognize
+            speak(str)
+       
+
+def sendmail()
+    rec = Receiver_email_id@gmail.com@yahoo.com
+
+    str =please speak the body of your email
+    speak(str)
+    msg = listen()
+
+    str = you have spoken the message
+    speak(str)
+    speak(msg)
+
+    server = smtplib.SMTP_SSL(smtp.gmail.com, 465)
+    server.login(unm, pwd)
+    server.sendmail(unm, rec, msg)
+    server.quit()
+    str = The email has been sent
+    speak(str)
+
+def readmail()
+    server = e.connect(imap.gmail.com, unm, pwd)
+    server.listids()
+
+    str =please say the serial number at the email you wanna read starting from latest
+    speak(str)
+
+    a = listen()
+    if( a == Tu)
+        a = 2
+
+        b = int(a)-1
+        email = server.mail(server.listids()[b])
+        str = THE email is from 
+        speak(str)
+        speak(email.from_addr)
+        str = The subject of the email is  
+        speak(str)
+        speak(email.title)
+        str = The body of email is 
+        speak(str)
+        speak(email.body)
+
+str = Welcome to voice controlled email services
+speak(str)
+
+while(1)
+
+    str = What do you want to do
+    speak(str)
+
+    str=Speak SEND to Send email Speak READ to Read Inbox Speak EXIT to Exit
+    speak(str)
+
+    ch = listen()
+
+    if ch == 'send'
+        str = you have chosen to send and email
+        speak(str)
+        sendmail()
+
+    elif ch == 'read'
+         str = You have chosen to read email
+         speak(str)
+         readmail()
+
+    elif ch == 'exit' 
+        str = You have chosen to exit , bye bye 
+        speak(str)
+        exit(1)
+
+    else
+         str = Ivalid choice , you said 
+         speak(str)
+         speak(ch)
